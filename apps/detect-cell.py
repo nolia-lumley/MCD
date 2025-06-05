@@ -75,7 +75,7 @@ def save_centroids_to_csv(cell_centroids, candidate_cell_centroids, output_path)
 
 
 if __name__ == "__main__":
-    image_path = 'example_datasets/patient1/image1.png'
+    image_path = 'example_datasets/patient4/080_OD_PRE1_ 3.png'
     base_output = 'output/output_one_image'
 
     image_name, image_ext = os.path.splitext(os.path.basename(image_path))
