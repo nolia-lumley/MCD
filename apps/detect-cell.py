@@ -104,7 +104,8 @@ if __name__ == "__main__":
         "threshold_lambda": cfg.infer_threshold.threshold_lambda,
         "lower_bound": cfg.infer_threshold.lower_bound,
         "upper_bound": cfg.infer_threshold.upper_bound,
-        "device": device
+        "device": device,
+        "box_size": cfg.boudning_box.size
     }
     print(f"The device is {device}")
     print(f"Loading Vision Foundation Model ...")
@@ -123,13 +124,14 @@ if __name__ == "__main__":
     point_prompts = results['point_prompts']
     candidate_cell_mask = results['candidate_cell_mask']
     cell_mask = results['cell_mask']
+    box_size = params['box_size']
     cell_centroids = get_centroids(cell_mask)
     candidate_cell_centroids = get_centroids(candidate_cell_mask)
 
     green_color = '#00FF00'
     red_color = '#FF0000'
-    image_with_cell_boxes = draw_square(image_path, cell_centroids, box_outline=green_color)
-    image_with_candidate_cell_boxes = draw_square(image_path, candidate_cell_centroids, box_outline=red_color)
+    image_with_cell_boxes = draw_square(image_path, cell_centroids, box_size=box_size, box_outline=green_color)
+    image_with_candidate_cell_boxes = draw_square(image_path, candidate_cell_centroids,box_size=box_size, box_outline=red_color)
 
     csv_output_path = f'{output_folder}/centroids.csv'
     save_centroids_to_csv(cell_centroids, candidate_cell_centroids, csv_output_path)
